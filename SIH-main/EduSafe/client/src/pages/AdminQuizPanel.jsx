@@ -49,10 +49,10 @@ const AdminQuizPanel = () => {
 
     const loadModules = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/modules?limit=100');
+        const res = await axios.get('process.env.REACT_APP_PS_URL/modules?limit=100');
         if (res.data.success) {
           setModules(res.data.data.modules);
-        }
+        }process.env.REACT_APP_PS_URL
       } catch (e) {
         console.error('Failed to load modules', e);
       }
@@ -68,7 +68,7 @@ const AdminQuizPanel = () => {
   const loadQuiz = async (moduleId) => {
     try {
       setLoading(true);
-      const res = await axios.get(`http://localhost:5000/api/modules/${moduleId}/quiz/admin`, {
+      const res = await axios.get(`process.env.REACT_APP_PS_URL/modules/${moduleId}/quiz/admin`, {
         headers: authHeaders()
       });
       if (res.data.success) {
@@ -95,7 +95,7 @@ const AdminQuizPanel = () => {
     try {
       if (!selectedModuleId) return;
       const payload = { ...form };
-      const res = await axios.post(`http://localhost:5000/api/modules/${selectedModuleId}/quiz/questions`, payload, {
+      const res = await axios.post(`process.env.REACT_APP_PS_URL/modules/${selectedModuleId}/quiz/questions`, payload, {
         headers: authHeaders()
       });
       if (res.data.success) {
@@ -267,11 +267,11 @@ const AdminQuizPanel = () => {
               onClick={async()=>{
                 try{
                   const payload={...moduleForm,tags:moduleForm.tags?moduleForm.tags.split(',').map(t=>t.trim()).filter(Boolean):[]};
-                  const res=await axios.post('http://localhost:5000/api/modules',payload,{headers:authHeaders()});
+                  const res=await axios.post('process.env.REACT_APP_PS_URL/modules',payload,{headers:authHeaders()});
                   if(res.data.success){
                     alert('Module created');
                     setModuleForm({title:'',description:'',difficulty:'beginner',duration:'1 week',estimatedHours:2,category:'Disaster',tags:'',thumbnail:'',introVideoUrl:'',isPublished:true,isActive:true,notes:''});
-                    const reload=await axios.get('http://localhost:5000/api/modules?limit=100');
+                    const reload=await axios.get('process.env.REACT_APP_PS_URLi/modules?limit=100');
                     if(reload.data.success){setModules(reload.data.data.modules)}
                   }
                 }catch(e){
@@ -285,10 +285,10 @@ const AdminQuizPanel = () => {
               onClick={async()=>{
                 try{
                   const payload={...moduleForm,tags:moduleForm.tags?moduleForm.tags.split(',').map(t=>t.trim()).filter(Boolean):[]};
-                  const res=await axios.put(`http://localhost:5000/api/modules/${selectedModuleId}`,payload,{headers:authHeaders()});
+                  const res=await axios.put(`process.env.REACT_APP_PS_URL/modules/${selectedModuleId}`,payload,{headers:authHeaders()});
                   if(res.data.success){
                     alert('Module updated');
-                    const reload=await axios.get('http://localhost:5000/api/modules?limit=100');
+                    const reload=await axios.get('process.env.REACT_APP_PS_URL/modules?limit=100');
                     if(reload.data.success){setModules(reload.data.data.modules)}
                   }
                 }catch(e){

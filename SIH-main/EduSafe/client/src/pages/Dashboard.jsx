@@ -47,7 +47,7 @@ const Dashboard = () => {
       setLoading(true);
       // Try to fetch from API first
       try {
-        const response = await axios.get('http://localhost:5000/api/modules');
+        const response = await axios.get('process.env.REACT_APP_PS_URL/modules');
         
         if (response.data.success) {
           console.log('Modules data:', response.data.data.modules);

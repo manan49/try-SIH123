@@ -86,7 +86,7 @@ const ReportIssuePage = () => {
         submitData.append('image', imageFile);
       }
 
-      const response = await axios.post('http://localhost:5000/api/reports', submitData, {
+      const response = await axios.post('process.env.REACT_APP_PS_URL/reports', submitData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'

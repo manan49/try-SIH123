@@ -53,7 +53,7 @@ const ReportsDashboard = () => {
         ...filters
       });
 
-      const response = await axios.get(`http://localhost:5000/api/reports?${params}`, {
+      const response = await axios.get(`process.env.REACT_APP_PS_URL/reports?${params}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -78,7 +78,7 @@ const ReportsDashboard = () => {
   const fetchStats = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/reports/stats/summary', {
+      const response = await axios.get('process.env.REACT_APP_PS_URL/reports/stats/summary', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -96,7 +96,7 @@ const ReportsDashboard = () => {
     try {
       setResolvingId(reportId);
       const token = localStorage.getItem('token');
-      await axios.patch(`http://localhost:5000/api/reports/${reportId}/resolve`, { description: 'Resolved by teacher' }, {
+      await axios.patch(`process.env.REACT_APP_PS_URL/reports/${reportId}/resolve`, { description: 'Resolved by teacher' }, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

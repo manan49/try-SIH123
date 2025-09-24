@@ -27,14 +27,14 @@ const ModuleDetailPage = () => {
       setLoading(true);
       
       // Fetch module details
-      const moduleResponse = await axios.get(`http://localhost:5000/api/modules/${id}`);
+      const moduleResponse = await axios.get(`process.env.REACT_APP_PS_URL/modules/${id}`);
       if (moduleResponse.data.success) {
         setModule(moduleResponse.data.data.module);
       }
 
       // Fetch quiz details
       try {
-        const quizResponse = await axios.get(`http://localhost:5000/api/modules/${id}/quiz`);
+        const quizResponse = await axios.get(`process.env.REACT_APP_PS_URL/modules/${id}/quiz`);
         if (quizResponse.data.success) {
           setQuiz(quizResponse.data.data.quiz);
         }
@@ -80,7 +80,7 @@ const ModuleDetailPage = () => {
   const markModuleCompleted = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post(`http://localhost:5000/api/modules/${id}/complete`, {}, {
+      const res = await axios.post(`process.env.REACT_APP_PS_URL/modules/${id}/complete`, {}, {
         headers: token ? { Authorization: `Bearer ${token}` } : {}
       });
       if (res.data?.success) {
@@ -547,7 +547,7 @@ const ModuleDetailPage = () => {
                                 answers: Object.entries(answers).map(([questionId, optionId]) => ({ questionId, optionId }))
                               };
                               const token = localStorage.getItem('token');
-                              const res = await axios.post(`http://localhost:5000/api/modules/${id}/quiz/submit`, payload, {
+                              const res = await axios.post(`process.env.REACT_APP_PS_URL/modules/${id}/quiz/submit`, payload, {
                                 headers: token ? { Authorization: `Bearer ${token}` } : {}
                               });
                               if (res.data.success) {
